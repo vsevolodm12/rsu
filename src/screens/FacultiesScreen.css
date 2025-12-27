@@ -24,7 +24,7 @@
 
 .pull-hint {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-tertiary);
   text-align: center;
 }
 
@@ -34,6 +34,7 @@
   margin: 0;
   text-align: center;
   text-transform: capitalize;
+  color: var(--text-primary);
 }
 
 .faculties-list {
@@ -59,7 +60,7 @@
 .section-title {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-tertiary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin: 0;
@@ -70,31 +71,31 @@
   min-height: 56px;
   font-size: 16px;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 /* Кнопки институтов (вторая секция) - стандартный стиль как у курсов */
 .faculties-list .section-group:nth-child(2) .button-secondary {
   background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .faculties-list .section-group:nth-child(2) .button-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--bg-hover);
+  border-color: var(--border-hover);
 }
 
 .faculties-list .section-group:last-child .button-secondary {
-  background-color: rgba(26, 26, 26, 0.5);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   opacity: 0.6;
 }
 
 .faculties-list .section-group:last-child .button-secondary:hover {
-  background-color: rgba(26, 26, 26, 0.6);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
   opacity: 0.8;
 }
 

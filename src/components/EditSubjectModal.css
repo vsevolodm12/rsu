@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,22 +13,22 @@
 }
 
 .modal-content {
-  background-color: #1a1a1a;
+  background-color: var(--bg-primary);
   border-radius: 16px;
   padding: 32px;
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px var(--shadow);
+  border: 1px solid var(--border-color);
 }
 
 .modal-title {
   font-size: 32px;
   font-weight: 600;
   margin: 0 0 32px 0;
-  color: #ffffff;
+  color: var(--text-primary);
   text-align: center;
 }
 
@@ -53,17 +53,17 @@
 .form-label {
   font-size: 16px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .form-input {
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 12px 16px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   font-family: inherit;
   transition: all 0.2s ease;
   min-height: 48px;
@@ -71,12 +71,12 @@
 
 .form-input:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.3);
-  background-color: #2a2a2a;
+  border-color: var(--border-hover);
+  background-color: var(--bg-tertiary);
 }
 
 .form-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-tertiary);
 }
 
 .form-actions {

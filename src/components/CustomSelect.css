@@ -5,12 +5,12 @@
 
 .custom-select-trigger {
   width: 100%;
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 12px 16px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   font-family: inherit;
   cursor: pointer;
   display: flex;
@@ -21,13 +21,13 @@
 }
 
 .custom-select-trigger:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background-color: #2a2a2a;
+  border-color: var(--border-hover);
+  background-color: var(--bg-hover);
 }
 
 .custom-select-arrow {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-tertiary);
   transition: transform 0.2s ease;
   margin-left: 8px;
 }
@@ -41,12 +41,12 @@
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background-color: #2a2a2a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px var(--shadow);
   max-height: 200px;
   overflow-y: auto;
 }
@@ -57,7 +57,7 @@
   border: none;
   padding: 12px 16px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   font-family: inherit;
   cursor: pointer;
   text-align: left;
@@ -65,12 +65,12 @@
 }
 
 .custom-select-option:hover {
-  background-color: #3a3a3a;
+  background-color: var(--bg-hover);
 }
 
 .custom-select-option.selected {
-  background-color: #3a3a3a;
-  color: #ffffff;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -79,15 +79,15 @@
 }
 
 .custom-select-dropdown::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--bg-secondary);
 }
 
 .custom-select-dropdown::-webkit-scrollbar-thumb {
-  background: #3a3a3a;
+  background: var(--bg-tertiary);
   border-radius: 3px;
 }
 
 .custom-select-dropdown::-webkit-scrollbar-thumb:hover {
-  background: #4a4a4a;
+  background: var(--bg-hover);
 }
 

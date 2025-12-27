@@ -14,33 +14,33 @@
 }
 
 .button-primary {
-  background-color: #3a3a3a;
-  color: #ffffff;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   border: none;
 }
 
 .button-primary:hover {
-  background-color: #4a4a4a;
+  background-color: var(--bg-hover);
 }
 
 .button-primary:active {
-  background-color: #2a2a2a;
+  background-color: var(--bg-secondary);
 }
 
 .button-secondary {
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .button-secondary:hover {
-  background-color: #2a2a2a;
-  color: rgba(255, 255, 255, 0.9);
-  border-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
 }
 
 .button-secondary:active {
-  background-color: #1a1a1a;
+  background-color: var(--bg-tertiary);
 }
 
 .button-full-width {

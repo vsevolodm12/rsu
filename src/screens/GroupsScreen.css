@@ -24,7 +24,7 @@
   margin: 0;
   text-align: center;
   text-transform: capitalize;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .screen-subtitle {
@@ -32,7 +32,7 @@
   font-weight: 500;
   margin: 0;
   text-align: center;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-tertiary);
 }
 
 .groups-list {
@@ -48,7 +48,7 @@
   min-height: 56px;
   font-size: 16px;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {

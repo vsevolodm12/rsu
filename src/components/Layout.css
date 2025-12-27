@@ -2,6 +2,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.theme-toggle-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
 }
 
 .layout-content {
@@ -15,6 +23,11 @@
 @media (max-width: 768px) {
   .layout-content {
     padding: 16px;
+  }
+
+  .theme-toggle-container {
+    top: 16px;
+    right: 16px;
   }
 }
 

@@ -22,6 +22,7 @@
   margin: 0;
   text-align: center;
   text-transform: capitalize;
+  color: var(--text-primary);
 }
 
 .group-info {
@@ -31,13 +32,13 @@
 
 .group-field {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   margin: 0 0 8px 0;
 }
 
 .group-profile {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-tertiary);
   margin: 0;
 }
 
@@ -53,19 +54,19 @@
 }
 
 .week-toggle .button-primary {
-  background-color: #3a3a3a;
-  color: #ffffff;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .week-toggle .button-secondary {
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .week-toggle .button-secondary:hover {
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.8);
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .schedule-container {
@@ -75,7 +76,7 @@
 }
 
 .day-block {
-  background-color: #2a2a2a;
+  background-color: var(--bg-secondary);
   border-radius: 16px;
   padding: 20px;
   display: flex;
@@ -89,7 +90,8 @@
   margin: 0;
   text-transform: capitalize;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .subjects-list {
@@ -99,7 +101,7 @@
 }
 
 .subject-card {
-  background-color: #1a1a1a;
+  background-color: var(--bg-tertiary);
   border-radius: 12px;
   padding: 12px 16px;
   display: flex;
@@ -108,12 +110,12 @@
 }
 
 .subject-card-empty {
-  background-color: rgba(26, 26, 26, 0.5);
+  background-color: var(--bg-secondary);
   opacity: 0.6;
 }
 
 .subject-card-empty .subject-name {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-tertiary);
 }
 
 .subject-header {
@@ -130,6 +132,7 @@
   margin: 0;
   flex: 1;
   line-height: 1.4;
+  color: var(--text-primary);
 }
 
 .subject-header-right {
@@ -142,7 +145,7 @@
 
 .subject-time {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-tertiary);
   margin: 0;
   font-weight: 400;
   white-space: nowrap;
@@ -151,8 +154,8 @@
 
 .subject-type {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  background-color: #2a2a2a;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
   padding: 4px 8px;
   border-radius: 8px;
   white-space: nowrap;
@@ -162,21 +165,21 @@
 
 .subject-instructor {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1.4;
 }
 
 .subject-room {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-tertiary);
   margin: 0;
   line-height: 1.4;
 }
 
 .no-subjects {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-tertiary);
   text-align: center;
   padding: 16px;
   margin: 0;
