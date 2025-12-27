@@ -1,19 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
-import LoadingSpinner from '../components/LoadingSpinner'
 import { faculties, getGroupById, Group } from '../data/scheduleData'
 import './FacultiesScreen.css'
 
 const FacultiesScreen: React.FC = () => {
   const navigate = useNavigate()
   const [savedGroup, setSavedGroup] = useState<Group | null>(null)
-  const [isRefreshing, setIsRefreshing] = useState(false)
-  const [pullDistance, setPullDistance] = useState(0)
-  const startY = useRef<number>(0)
-  const currentY = useRef<number>(0)
-  const isPulling = useRef<boolean>(false)
-  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const savedGroupId = localStorage.getItem('savedGroupId')
@@ -25,77 +18,8 @@ const FacultiesScreen: React.FC = () => {
     }
   }, [])
 
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const handleTouchStart = (e: TouchEvent) => {
-      if (window.scrollY === 0) {
-        startY.current = e.touches[0].clientY
-        isPulling.current = true
-      }
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!isPulling.current) return
-      
-      currentY.current = e.touches[0].clientY
-      const distance = currentY.current - startY.current
-      
-      if (distance > 0 && window.scrollY === 0) {
-        const pullAmount = Math.min(distance * 0.5, 100)
-        setPullDistance(pullAmount)
-        e.preventDefault()
-      }
-    }
-
-    const handleTouchEnd = () => {
-      if (isPulling.current && pullDistance > 50) {
-        setIsRefreshing(true)
-        // Симуляция обновления данных
-        setTimeout(() => {
-          const savedGroupId = localStorage.getItem('savedGroupId')
-          if (savedGroupId) {
-            const group = getGroupById(savedGroupId)
-            if (group) {
-              setSavedGroup(group)
-            }
-          }
-          setIsRefreshing(false)
-          setPullDistance(0)
-        }, 1000)
-      } else {
-        setPullDistance(0)
-      }
-      isPulling.current = false
-    }
-
-    container.addEventListener('touchstart', handleTouchStart, { passive: false })
-    container.addEventListener('touchmove', handleTouchMove, { passive: false })
-    container.addEventListener('touchend', handleTouchEnd)
-
-    return () => {
-      container.removeEventListener('touchstart', handleTouchStart)
-      container.removeEventListener('touchmove', handleTouchMove)
-      container.removeEventListener('touchend', handleTouchEnd)
-    }
-  }, [pullDistance])
-
   return (
-    <div className="faculties-screen" ref={containerRef}>
-      <div
-        className="pull-to-refresh-indicator"
-        style={{
-          transform: `translateY(${Math.max(0, pullDistance - 50)}px)`,
-          opacity: pullDistance > 20 ? Math.min(1, (pullDistance - 20) / 30) : 0,
-        }}
-      >
-        {isRefreshing || pullDistance > 50 ? (
-          <LoadingSpinner size={32} />
-        ) : (
-          <div className="pull-hint">Потяните для обновления</div>
-        )}
-      </div>
+    <div className="faculties-screen">
       <h1 className="screen-title">Расписание | Факультеты</h1>
       <div className="faculties-list">
         {/* Секция 1: Моя группа */}
