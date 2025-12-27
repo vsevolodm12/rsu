@@ -5,7 +5,6 @@ import EditSubjectModal from '../components/EditSubjectModal'
 import {
   groups,
   faculties,
-  courses,
   Subject,
   updateSubject,
   deleteSubject,
