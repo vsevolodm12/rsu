@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Subject } from '../data/scheduleData'
 import Button from './Button'
+import CustomSelect from './CustomSelect'
 import './EditSubjectModal.css'
 
 interface EditSubjectModalProps {
@@ -52,9 +53,7 @@ const EditSubjectModal: React.FC<EditSubjectModalProps> = ({
 
   if (!isOpen || !subject) return null
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
+  const handleSave = () => {
     // Конвертируем время обратно из формата "07:45" в "7:45"
     const formatTimeFromInput = (time: string): string => {
       if (!time) return ''
@@ -78,7 +77,11 @@ const EditSubjectModal: React.FC<EditSubjectModalProps> = ({
       timeEnd: formatTimeFromInput(formData.timeEnd || subject.timeEnd),
     }
     onSave(updatedSubject)
-    onClose()
+  }
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    handleSave()
   }
 
   const handleCancel = () => {
@@ -103,20 +106,20 @@ const EditSubjectModal: React.FC<EditSubjectModalProps> = ({
 
           <div className="form-group">
             <label className="form-label">Тип занятия</label>
-            <select
-              className="form-select"
-              value={formData.type}
-              onChange={(e) =>
+            <CustomSelect
+              value={formData.type || 'lecture'}
+              options={[
+                { value: 'lecture', label: 'Лекция' },
+                { value: 'practical', label: 'Практика' },
+                { value: 'lab', label: 'Лабораторная' },
+              ]}
+              onChange={(value) =>
                 setFormData({
                   ...formData,
-                  type: e.target.value as 'lecture' | 'practical' | 'lab',
+                  type: value as 'lecture' | 'practical' | 'lab',
                 })
               }
-            >
-              <option value="lecture">Лекция</option>
-              <option value="practical">Практика</option>
-              <option value="lab">Лабораторная</option>
-            </select>
+            />
           </div>
 
           <div className="form-group">
@@ -168,10 +171,10 @@ const EditSubjectModal: React.FC<EditSubjectModalProps> = ({
           </div>
 
           <div className="form-actions">
-            <Button type="button" onClick={handleCancel} variant="secondary">
+            <Button onClick={handleCancel} variant="secondary">
               Отмена
             </Button>
-            <Button type="submit" variant="primary">
+            <Button onClick={handleSave} variant="primary">
               Сохранить
             </Button>
           </div>

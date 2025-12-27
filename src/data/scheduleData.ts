@@ -18,6 +18,7 @@ export interface Group {
   id: string
   number: string
   facultyId: string
+  courseId: string
   field: string
   profile: string
   schedule: {
@@ -26,17 +27,51 @@ export interface Group {
   }
 }
 
+export interface Course {
+  id: string
+  number: number
+  facultyId: string
+  groups: string[]
+}
+
 export interface Faculty {
   id: string
   name: string
-  groups: string[]
+  courses: string[]
 }
 
 export const faculties: Faculty[] = [
   {
     id: '1',
     name: 'Институт естественных наук',
+    courses: ['1-1', '1-2', '1-3', '1-4'], // Все курсы института 1
+  },
+]
+
+export const courses: Course[] = [
+  {
+    id: '1-1',
+    number: 1,
+    facultyId: '1',
+    groups: [],
+  },
+  {
+    id: '1-2',
+    number: 2,
+    facultyId: '1',
+    groups: [],
+  },
+  {
+    id: '1-3',
+    number: 3,
+    facultyId: '1',
     groups: ['5306'],
+  },
+  {
+    id: '1-4',
+    number: 4,
+    facultyId: '1',
+    groups: [],
   },
 ]
 
@@ -110,6 +145,7 @@ export const groups: Group[] = [
     id: '5306',
     number: '5306',
     facultyId: '1',
+    courseId: '1-3',
     field: '43.03.02 Туризм',
     profile: 'Технология и организация туроператорских и турагентских услуг',
     schedule: {
@@ -428,8 +464,32 @@ export const getFacultyById = (id: string): Faculty | undefined => {
   return faculties.find((faculty) => id === faculty.id)
 }
 
-export const getGroupsByFacultyId = (facultyId: string): Group[] => {
-  return groups.filter((group) => group.facultyId === facultyId)
+export const getCourseById = (id: string): Course | undefined => {
+  return courses.find((course) => course.id === id)
+}
+
+export const getCoursesByFacultyId = (facultyId: string): Course[] => {
+  return courses.filter((course) => course.facultyId === facultyId)
+}
+
+export const getGroupsByCourseId = (courseId: string): Group[] => {
+  return groups.filter((group) => group.courseId === courseId)
+}
+
+// Функция для получения предмета по ID
+export const getSubjectById = (
+  groupId: string,
+  week: 'numerator' | 'denominator',
+  day: string,
+  subjectId: string
+): Subject | undefined => {
+  const group = groups.find((g) => g.id === groupId)
+  if (!group) return undefined
+
+  const daySchedule = group.schedule[week].find((d) => d.day === day)
+  if (!daySchedule) return undefined
+
+  return daySchedule.subjects.find((s) => s.id === subjectId)
 }
 
 // Функция для обновления предмета в расписании
@@ -452,7 +512,7 @@ export const updateSubject = (
   daySchedule.subjects[subjectIndex] = updatedSubject
 }
 
-// Функция для удаления предмета из расписания
+// Функция для удаления предмета из расписания (заменяет на "Нет пары")
 export const deleteSubject = (
   groupId: string,
   week: 'numerator' | 'denominator',
@@ -465,5 +525,22 @@ export const deleteSubject = (
   const daySchedule = group.schedule[week].find((d) => d.day === day)
   if (!daySchedule) return
 
-  daySchedule.subjects = daySchedule.subjects.filter((s) => s.id !== subjectId)
+  const subjectIndex = daySchedule.subjects.findIndex((s) => s.id === subjectId)
+  if (subjectIndex === -1) return
+
+  // Получаем номер пары по индексу (начинается с 1)
+  const pairNumber = subjectIndex + 1
+  const time = getPairTime(pairNumber)
+  
+  // Заменяем предмет на "Нет пары" вместо удаления
+  daySchedule.subjects[subjectIndex] = {
+    id: `empty-${pairNumber}-${week}-${Date.now()}`,
+    name: 'Нет пары',
+    type: 'lecture',
+    instructor: '',
+    room: '',
+    week: week,
+    timeStart: time.start,
+    timeEnd: time.end,
+  }
 }

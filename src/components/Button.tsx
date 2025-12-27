@@ -7,6 +7,7 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary'
   fullWidth?: boolean
   className?: string
+  disabled?: boolean
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,11 +16,13 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   fullWidth = false,
   className = '',
+  disabled = false,
 }) => {
   return (
     <button
       className={`button button-${variant} ${fullWidth ? 'button-full-width' : ''} ${className}`}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

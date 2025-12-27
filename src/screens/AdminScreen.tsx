@@ -5,16 +5,20 @@ import EditSubjectModal from '../components/EditSubjectModal'
 import {
   groups,
   faculties,
+  courses,
   Subject,
   updateSubject,
   deleteSubject,
-  getGroupsByFacultyId,
+  getCoursesByFacultyId,
+  getGroupsByCourseId,
+  getSubjectById,
 } from '../data/scheduleData'
 import './AdminScreen.css'
 
 const AdminScreen: React.FC = () => {
   const navigate = useNavigate()
   const [selectedFaculty, setSelectedFaculty] = useState<string | null>(null)
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(null)
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null)
   const [selectedWeek, setSelectedWeek] = useState<'numerator' | 'denominator'>(
     'numerator'
@@ -25,6 +29,13 @@ const AdminScreen: React.FC = () => {
   } | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
+  const [history, setHistory] = useState<Array<{
+    groupId: string
+    week: 'numerator' | 'denominator'
+    day: string
+    subjectId: string
+    previousSubject: Subject
+  }>>([])
 
   const handleEdit = (subject: Subject, day: string) => {
     setEditingSubject({ subject, day })
@@ -33,6 +44,18 @@ const AdminScreen: React.FC = () => {
 
   const handleSave = (updatedSubject: Subject) => {
     if (!selectedGroup || !editingSubject) return
+
+    // Сохраняем предыдущее состояние в историю
+    setHistory((prev) => [
+      ...prev,
+      {
+        groupId: selectedGroup,
+        week: selectedWeek,
+        day: editingSubject.day,
+        subjectId: editingSubject.subject.id,
+        previousSubject: { ...editingSubject.subject },
+      },
+    ])
 
     updateSubject(
       selectedGroup,
@@ -53,11 +76,48 @@ const AdminScreen: React.FC = () => {
     if (!selectedGroup) return
 
     if (confirm('Удалить предмет?')) {
+      // Получаем текущий предмет перед удалением
+      const currentSubject = getSubjectById(selectedGroup, selectedWeek, day, subjectId)
+      if (currentSubject) {
+        // Сохраняем предыдущее состояние в историю
+        setHistory((prev) => [
+          ...prev,
+          {
+            groupId: selectedGroup,
+            week: selectedWeek,
+            day: day,
+            subjectId: subjectId,
+            previousSubject: { ...currentSubject },
+          },
+        ])
+      }
+
       deleteSubject(selectedGroup, selectedWeek, day, subjectId)
       
       // Принудительно обновляем компонент
       setRefreshKey((prev) => prev + 1)
     }
+  }
+
+  const handleUndo = () => {
+    if (history.length === 0 || !selectedGroup) return
+
+    const lastAction = history[history.length - 1]
+    
+    // Восстанавливаем предыдущее состояние
+    updateSubject(
+      lastAction.groupId,
+      lastAction.week,
+      lastAction.day,
+      lastAction.subjectId,
+      lastAction.previousSubject
+    )
+
+    // Удаляем последнее действие из истории
+    setHistory((prev) => prev.slice(0, -1))
+    
+    // Принудительно обновляем компонент
+    setRefreshKey((prev) => prev + 1)
   }
 
   const handleModalClose = () => {
@@ -69,8 +129,16 @@ const AdminScreen: React.FC = () => {
     ? faculties.find((f) => f.id === selectedFaculty)
     : null
 
-  const availableGroups = selectedFaculty
-    ? getGroupsByFacultyId(selectedFaculty)
+  const availableCourses = selectedFaculty
+    ? getCoursesByFacultyId(selectedFaculty)
+    : []
+
+  const selectedCourseData = selectedCourse
+    ? courses.find((c) => c.id === selectedCourse)
+    : null
+
+  const availableGroups = selectedCourse
+    ? getGroupsByCourseId(selectedCourse)
     : []
 
   const selectedGroupData = selectedGroup
@@ -89,15 +157,28 @@ const AdminScreen: React.FC = () => {
 
   const handleFacultySelect = (facultyId: string) => {
     setSelectedFaculty(facultyId)
+    setSelectedCourse(null)
+    setSelectedGroup(null)
+  }
+
+  const handleCourseSelect = (courseId: string) => {
+    setSelectedCourse(courseId)
     setSelectedGroup(null)
   }
 
   const handleGroupSelect = (groupId: string) => {
     setSelectedGroup(groupId)
+    setHistory([]) // Очищаем историю при смене группы
   }
 
   const handleBackToFaculties = () => {
     setSelectedFaculty(null)
+    setSelectedCourse(null)
+    setSelectedGroup(null)
+  }
+
+  const handleBackToCourses = () => {
+    setSelectedCourse(null)
     setSelectedGroup(null)
   }
 
@@ -105,92 +186,121 @@ const AdminScreen: React.FC = () => {
     setSelectedGroup(null)
   }
 
+  const handleBack = () => {
+    if (selectedGroup) {
+      handleBackToGroups()
+    } else if (selectedCourse) {
+      handleBackToCourses()
+    } else if (selectedFaculty) {
+      handleBackToFaculties()
+    } else {
+      navigate('/')
+    }
+  }
+
   return (
     <div className="admin-screen">
       <Button
-        onClick={() => navigate('/')}
+        onClick={handleBack}
         variant="secondary"
         className="back-button"
       >
         ← Назад
       </Button>
-      <h1 className="screen-title">Админ Панель</h1>
 
       {!selectedFaculty ? (
-        <div className="admin-controls">
-          <div className="control-group">
-            <label className="control-label">Выберите Институт</label>
-            <div className="faculties-list">
-              {faculties.map((faculty) => (
-                <Button
-                  key={faculty.id}
-                  onClick={() => handleFacultySelect(faculty.id)}
-                  variant="primary"
-                  fullWidth
-                >
-                  {faculty.name}
-                </Button>
-              ))}
-            </div>
+        <>
+          <div className="header-section">
+            <h1 className="screen-title">Выберите Институт</h1>
           </div>
-        </div>
+          <div className="faculties-list">
+            {faculties.map((faculty) => (
+              <Button
+                key={faculty.id}
+                onClick={() => handleFacultySelect(faculty.id)}
+                variant="primary"
+                fullWidth
+              >
+                {faculty.name}
+              </Button>
+            ))}
+          </div>
+        </>
+      ) : !selectedCourse ? (
+        <>
+          <div className="header-section">
+            <h1 className="screen-title">{selectedFacultyData?.name}</h1>
+            <h2 className="screen-subtitle">Выберите Курс</h2>
+          </div>
+          <div className="courses-list">
+            {availableCourses.map((course) => {
+              const hasGroups = course.groups.length > 0
+              return (
+                <Button
+                  key={course.id}
+                  onClick={() => hasGroups && handleCourseSelect(course.id)}
+                  variant="secondary"
+                  fullWidth
+                  className={!hasGroups ? 'course-placeholder' : ''}
+                >
+                  Курс {course.number}
+                </Button>
+              )
+            })}
+          </div>
+        </>
       ) : !selectedGroup ? (
-        <div className="admin-controls">
-          <button
-            onClick={handleBackToFaculties}
-            className="back-text-button"
-          >
-            Назад
-          </button>
-          <h2 className="faculty-subtitle">{selectedFacultyData?.name}</h2>
-          <div className="control-group">
-            <label className="control-label">Выберите Группу</label>
-            <div className="groups-list">
-              {availableGroups.map((group) => (
-                <Button
-                  key={group.id}
-                  onClick={() => handleGroupSelect(group.id)}
-                  variant="primary"
-                  fullWidth
-                >
-                  Группа: {group.number}
-                </Button>
-              ))}
-            </div>
+        <>
+          <div className="header-section">
+            <h1 className="screen-title">{selectedFacultyData?.name}</h1>
+            <h2 className="screen-subtitle">Выберите Группу</h2>
           </div>
-        </div>
+          <div className="groups-list">
+            {availableGroups.map((group) => (
+              <Button
+                key={group.id}
+                onClick={() => handleGroupSelect(group.id)}
+                variant="secondary"
+                fullWidth
+              >
+                {group.number}
+              </Button>
+            ))}
+          </div>
+        </>
       ) : (
         <>
-          <div className="admin-controls">
-            <button
-              onClick={handleBackToGroups}
-              className="back-text-button"
+          <div className="header-section">
+            <h1 className="screen-title">{selectedFacultyData?.name}</h1>
+          </div>
+          <div className="admin-actions">
+            <Button
+              onClick={handleUndo}
+              variant="secondary"
+              disabled={history.length === 0}
             >
-              Назад
-            </button>
-            <h2 className="faculty-subtitle">{selectedFacultyData?.name}</h2>
-            <div className="control-group">
-              <label className="control-label">
-                Группа: {selectedGroupData?.number}
-              </label>
-              <div className="control-group">
-                <label className="control-label">Неделя</label>
-                <div className="week-toggle">
-                  <Button
-                    onClick={() => setSelectedWeek('numerator')}
-                    variant={selectedWeek === 'numerator' ? 'primary' : 'secondary'}
-                  >
-                    Числитель
-                  </Button>
-                  <Button
-                    onClick={() => setSelectedWeek('denominator')}
-                    variant={selectedWeek === 'denominator' ? 'primary' : 'secondary'}
-                  >
-                    Знаменатель
-                  </Button>
-                </div>
-              </div>
-            </div>
+              Вернуть
+            </Button>
+          </div>
+          <div className="week-toggle">
+            <Button
+              onClick={() => {
+                setSelectedWeek('numerator')
+                setHistory([]) // Очищаем историю при смене недели
+              }}
+              variant={selectedWeek === 'numerator' ? 'primary' : 'secondary'}
+            >
+              Числитель
+            </Button>
+            <Button
+              onClick={() => {
+                setSelectedWeek('denominator')
+                setHistory([]) // Очищаем историю при смене недели
+              }}
+              variant={selectedWeek === 'denominator' ? 'primary' : 'secondary'}
+            >
+              Знаменатель
+            </Button>
           </div>
         </>
       )}

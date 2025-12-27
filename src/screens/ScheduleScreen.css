@@ -5,8 +5,14 @@
   min-height: calc(100vh - 200px);
 }
 
-.back-button {
+.schedule-header-actions {
+  display: flex;
+  gap: 12px;
   align-self: flex-start;
+}
+
+.back-button,
+.change-group-button {
   max-width: 200px;
 }
 

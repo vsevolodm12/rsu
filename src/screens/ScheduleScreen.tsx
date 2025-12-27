@@ -28,15 +28,29 @@ const ScheduleScreen: React.FC = () => {
     lab: 'Лабораторная',
   }
 
+  const handleChangeGroup = () => {
+    localStorage.removeItem('savedGroupId')
+    navigate('/')
+  }
+
   return (
     <div className="schedule-screen">
-      <Button
-        onClick={() => navigate(-1)}
-        variant="secondary"
-        className="back-button"
-      >
-        ← Назад
-      </Button>
+      <div className="schedule-header-actions">
+        <Button
+          onClick={() => navigate(-1)}
+          variant="secondary"
+          className="back-button"
+        >
+          ← Назад
+        </Button>
+        <Button
+          onClick={handleChangeGroup}
+          variant="secondary"
+          className="change-group-button"
+        >
+          Сменить группу
+        </Button>
+      </div>
       <h1 className="screen-title">Группа: {group.number}</h1>
       <div className="group-info">
         <p className="group-field">{group.field}</p>

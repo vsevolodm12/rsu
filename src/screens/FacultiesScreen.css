@@ -16,26 +16,78 @@
 .faculties-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
 }
 
-.faculties-list .button {
-  background-color: #3a3a3a;
-  color: #ffffff;
-  border: none;
+.section-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
-.faculties-list .button:hover {
-  background-color: #4a4a4a;
+.section-group:last-child {
+  margin-bottom: 0;
 }
 
 .faculties-list .button-secondary {
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.9);
+  min-height: 56px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.faculties-list .section-group:last-child .button-secondary {
+  background-color: rgba(26, 26, 26, 0.5);
+  color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.6;
+}
+
+.faculties-list .section-group:last-child .button-secondary:hover {
+  background-color: rgba(26, 26, 26, 0.6);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.15);
+  opacity: 0.8;
+}
+
+.faculties-list .section-group:first-child .button-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+.faculties-list .section-group:first-child .button-secondary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #60a5fa 0%,
+    #a78bfa 25%,
+    #f97316 50%,
+    #84cc16 75%,
+    #60a5fa 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-flow 4s ease-in-out infinite;
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media (max-width: 768px) {

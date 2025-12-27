@@ -1,4 +1,4 @@
-.groups-screen {
+.courses-screen {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -35,7 +35,7 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-.groups-list {
+.courses-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -44,15 +44,21 @@
   margin: 0 auto;
 }
 
-.groups-list .button-secondary {
+.courses-list .button-secondary {
   min-height: 56px;
   font-size: 16px;
   font-weight: 500;
   color: #ffffff;
 }
 
+.courses-list .course-placeholder {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
-  .groups-screen {
+  .courses-screen {
     gap: 16px;
   }
 
@@ -64,18 +70,8 @@
     font-size: 22px;
   }
 
-  .course-badge {
-    font-size: 13px;
-    padding: 5px 14px;
-  }
-
-  .groups-list {
+  .courses-list {
     gap: 10px;
   }
-
-  .back-button {
-    max-width: 150px;
-  }
 }
-
 
