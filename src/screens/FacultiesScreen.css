@@ -77,7 +77,7 @@
 }
 
 /* Зеленый стиль только для кнопки "Моя группа" */
-.faculties-list .section-group:has(.my-group-button) .button-secondary {
+.faculties-list .my-group-button {
   background: linear-gradient(
     to bottom,
     rgba(134, 239, 172, 0.12) 0%,
@@ -87,7 +87,7 @@
   transition: all 0.3s ease;
 }
 
-.faculties-list .section-group:has(.my-group-button) .button-secondary:hover {
+.faculties-list .my-group-button:hover {
   background: linear-gradient(
     to bottom,
     rgba(134, 239, 172, 0.18) 0%,
