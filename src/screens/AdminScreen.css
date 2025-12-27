@@ -113,22 +113,17 @@
   margin: 0 auto;
 }
 
-.faculties-list .button-primary {
+.faculties-list .button-secondary {
   min-height: 56px;
   font-size: 16px;
   font-weight: 500;
-  border: none;
-  background-color: #3a3a3a;
   color: #ffffff;
-  transition: all 0.2s ease;
 }
 
-.faculties-list .button-primary:hover {
-  background-color: #4a4a4a;
-}
-
-.faculties-list .button-primary:active {
-  background-color: #2a2a2a;
+.faculties-list .faculty-placeholder {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .groups-list .button-secondary {

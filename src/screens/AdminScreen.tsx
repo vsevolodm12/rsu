@@ -209,16 +209,20 @@ const AdminScreen: React.FC = () => {
             <h1 className="screen-title">Выберите Институт</h1>
           </div>
           <div className="faculties-list">
-            {faculties.map((faculty) => (
-              <Button
-                key={faculty.id}
-                onClick={() => handleFacultySelect(faculty.id)}
-                variant="primary"
-                fullWidth
-              >
-                {faculty.name}
-              </Button>
-            ))}
+            {faculties.map((faculty) => {
+              const hasCourses = faculty.courses.length > 0
+              return (
+                <Button
+                  key={faculty.id}
+                  onClick={() => hasCourses && handleFacultySelect(faculty.id)}
+                  variant="secondary"
+                  fullWidth
+                  className={!hasCourses ? 'faculty-placeholder' : ''}
+                >
+                  {faculty.name}
+                </Button>
+              )
+            })}
           </div>
         </>
       ) : !selectedCourse ? (
