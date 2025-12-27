@@ -171,10 +171,10 @@ const EditSubjectModal: React.FC<EditSubjectModalProps> = ({
           </div>
 
           <div className="form-actions">
-            <Button onClick={handleCancel} variant="secondary">
+            <Button type="button" onClick={handleCancel} variant="secondary">
               Отмена
             </Button>
-            <Button onClick={handleSave} variant="primary">
+            <Button type="submit" onClick={handleSave} variant="primary">
               Сохранить
             </Button>
           </div>

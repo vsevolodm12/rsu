@@ -8,6 +8,7 @@ interface ButtonProps {
   fullWidth?: boolean
   className?: string
   disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,9 +18,11 @@ const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   className = '',
   disabled = false,
+  type = 'button',
 }) => {
   return (
     <button
+      type={type}
       className={`button button-${variant} ${fullWidth ? 'button-full-width' : ''} ${className}`}
       onClick={onClick}
       disabled={disabled}
