@@ -1,0 +1,48 @@
+.groups-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: calc(100vh - 200px);
+}
+
+.back-button {
+  align-self: flex-start;
+  max-width: 200px;
+}
+
+.screen-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.groups-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .groups-screen {
+    gap: 24px;
+  }
+
+  .screen-title {
+    font-size: 20px;
+  }
+
+  .groups-list {
+    gap: 12px;
+  }
+
+  .back-button {
+    max-width: 150px;
+  }
+}
+
+

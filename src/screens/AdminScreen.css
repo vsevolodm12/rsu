@@ -1,0 +1,342 @@
+.admin-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: calc(100vh - 200px);
+}
+
+.back-button {
+  align-self: flex-start;
+  max-width: 200px;
+}
+
+.back-text-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 0;
+  text-align: left;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.back-text-button:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.faculty-subtitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 16px 0;
+}
+
+.screen-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.admin-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #2a2a2a;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.control-label {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.groups-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.faculties-list,
+.groups-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.faculties-list .button,
+.groups-list .button {
+  min-height: 56px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background-color: #1a1a1a;
+  transition: all 0.2s ease;
+}
+
+.faculties-list .button:hover,
+.groups-list .button:hover {
+  background-color: #2a2a2a;
+}
+
+.faculties-list .button:active,
+.groups-list .button:active {
+  background-color: #1a1a1a;
+}
+
+.week-toggle {
+  display: flex;
+  gap: 12px;
+}
+
+.week-toggle .button {
+  min-width: 120px;
+}
+
+.week-toggle .button-primary {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.week-toggle .button-secondary {
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.week-toggle .button-secondary:hover {
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.admin-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-group-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.schedule-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.day-block {
+  background-color: #2a2a2a;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.day-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: capitalize;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subjects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subject-card-admin {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subject-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subject-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.subject-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.subject-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.subject-time {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  font-weight: 400;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.subject-type {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: #2a2a2a;
+  padding: 4px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  text-transform: capitalize;
+  line-height: 1.2;
+}
+
+.subject-instructor {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.subject-room {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.subject-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.subject-actions .button {
+  flex: 1;
+  min-width: 120px;
+}
+
+.no-subjects {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .admin-screen {
+    gap: 20px;
+  }
+
+  .screen-title {
+    font-size: 22px;
+  }
+
+  .admin-controls {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .control-label {
+    font-size: 14px;
+  }
+
+  .groups-selector {
+    gap: 8px;
+  }
+
+  .week-toggle {
+    gap: 8px;
+  }
+
+  .week-toggle .button {
+    min-width: 100px;
+    font-size: 13px;
+  }
+
+  .admin-group-title {
+    font-size: 20px;
+  }
+
+  .day-block {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .day-title {
+    font-size: 18px;
+  }
+
+  .subject-card-admin {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .subject-name {
+    font-size: 14px;
+  }
+
+  .subject-type {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+
+  .subject-instructor,
+  .subject-room {
+    font-size: 12px;
+  }
+
+  .subject-actions {
+    flex-direction: column;
+  }
+
+  .subject-actions .button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .back-button {
+    max-width: 150px;
+  }
+}
+

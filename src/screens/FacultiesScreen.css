@@ -1,0 +1,55 @@
+.faculties-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: calc(100vh - 200px);
+}
+
+.screen-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.faculties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.faculties-list .button {
+  background-color: #3a3a3a;
+  color: #ffffff;
+  border: none;
+}
+
+.faculties-list .button:hover {
+  background-color: #4a4a4a;
+}
+
+.faculties-list .button-secondary {
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .faculties-screen {
+    gap: 24px;
+  }
+
+  .screen-title {
+    font-size: 24px;
+  }
+
+  .faculties-list {
+    gap: 12px;
+  }
+}
+
+
