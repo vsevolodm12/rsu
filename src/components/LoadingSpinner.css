@@ -18,7 +18,7 @@
 .spinner-path {
   stroke-dasharray: 90, 150;
   stroke-dashoffset: 0;
-  stroke: rgba(134, 239, 172, 0.8);
+  stroke: rgba(255, 255, 255, 0.7);
   animation: dash 1.4s ease-in-out infinite;
 }
 
