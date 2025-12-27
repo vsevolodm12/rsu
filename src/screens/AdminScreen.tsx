@@ -133,10 +133,6 @@ const AdminScreen: React.FC = () => {
     ? getCoursesByFacultyId(selectedFaculty)
     : []
 
-  const selectedCourseData = selectedCourse
-    ? courses.find((c) => c.id === selectedCourse)
-    : null
-
   const availableGroups = selectedCourse
     ? getGroupsByCourseId(selectedCourse)
     : []
