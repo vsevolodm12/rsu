@@ -20,33 +20,40 @@ const FacultiesScreen: React.FC = () => {
 
   return (
     <div className="faculties-screen">
-      <h1 className="screen-title">Факультеты</h1>
+      <h1 className="screen-title">Расписание | Факультеты</h1>
       <div className="faculties-list">
         {/* Секция 1: Моя группа */}
         {savedGroup && (
           <div className="section-group">
+            <h2 className="section-title">Перейти к расписанию</h2>
             <Button
               onClick={() => navigate(`/group/${savedGroup.id}`)}
               variant="secondary"
               fullWidth
+              className="my-group-button"
             >
-              Моя группа: {savedGroup.number}
+              Моя группа
             </Button>
           </div>
         )}
 
         {/* Секция 2: Институты */}
         <div className="section-group">
-          {faculties.map((faculty) => (
-            <Button
-              key={faculty.id}
-              onClick={() => navigate(`/faculty/${faculty.id}`)}
-              variant="secondary"
-              fullWidth
-            >
-              {faculty.name}
-            </Button>
-          ))}
+          <h2 className="section-title">Выбрать факультет</h2>
+          {faculties.map((faculty) => {
+            const hasCourses = faculty.courses.length > 0
+            return (
+              <Button
+                key={faculty.id}
+                onClick={() => hasCourses && navigate(`/faculty/${faculty.id}`)}
+                variant="secondary"
+                fullWidth
+                className={!hasCourses ? 'faculty-placeholder' : ''}
+              >
+                {faculty.name}
+              </Button>
+            )
+          })}
         </div>
 
         {/* Секция 3: Админ Панель */}
