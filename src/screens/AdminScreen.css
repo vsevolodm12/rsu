@@ -118,6 +118,26 @@
   font-size: 16px;
   font-weight: 500;
   color: #ffffff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faculties-list .button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.faculties-list .faculty-placeholder {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.faculties-list .button-secondary {
+  min-height: 56px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
 }
 
 .faculties-list .faculty-placeholder {
